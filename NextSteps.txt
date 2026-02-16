@@ -1,0 +1,11 @@
+Próximos Passos Cruciais
+
+
+
+Treinamento: Rodar o modelo YOLOv8 (preferencialmente em um ambiente com GPU, como o Google Colab) para gerar o arquivo .pt de detecção.
+
+
+Refinamento do Relatório: Expandir a base de dados de vulnerabilidades e contramedidas para cada componente identificado nos diagramas.
+
+
+Documentação e Vídeo: Preparar o link do GitHub e o vídeo de 15 minutos explicando a arquitetura da sua solução de IA.

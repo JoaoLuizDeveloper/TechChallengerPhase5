@@ -1,0 +1,32 @@
+path: 'D:\Git\PosGraduacao\Fase 05\Repos\Proprio\TechChallengerPhase5\datasets'
+
+train: train/images
+val: val/images
+
+nc: 23
+
+names: [
+  'usuario',
+  'servidor_ec2',
+  'banco_dados_rds',
+  'load_balancer',
+  'rede_vpc',
+  'aws_waf',
+  'aws_shield',
+  'web_server',
+  'internet',
+  'azure_api_management',
+  'azure_logic_apps',
+  'azure_sql_database',
+  'aws_cloud_trail',
+  'aws_key_managment_KMS',
+  'aws_backup',
+  'aws_cloud_watch',
+  'microsoft_entra_ID',
+  'developer_portal',
+  'rest_api',
+  'soap_apis',
+  'api_gateway',
+  'banco_dados',
+  'servidor_app'
+]

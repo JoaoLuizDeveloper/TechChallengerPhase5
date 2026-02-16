@@ -1,0 +1,2 @@
+Imagem,Componente,Ameaça STRIDE,Recomendação
+img1.png,servidor_ec2,Tampering / DoS,Security Groups e Patching
