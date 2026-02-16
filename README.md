@@ -1,5 +1,76 @@
-🛡️ CloudGuard YOLO: Auditoria Automatizada de Infraestrutura via STRIDEEste projeto foi desenvolvido como parte do Tech Challenge (Fase 5) da Pós-Graduação. O objetivo é automatizar a detecção de componentes de infraestrutura em nuvem em diagramas técnicos e aplicar uma auditoria de segurança baseada na metodologia STRIDE (Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, e Elevation of Privilege).Utilizando o framework YOLOv8, o sistema identifica ativos (como instâncias EC2, Bancos de Dados, etc.) e gera recomendações automáticas para mitigar ameaças específicas de cada componente.📂 Estrutura do ProjetoA organização dos arquivos segue o padrão exigido pela Ultralytics para treinamento de modelos de detecção de objetos:dataset/: Diretório raiz dos dados.images/: Subpastas train e val contendo as imagens (.png, .jpg).labels/: Subpastas train e val contendo as anotações YOLO (.txt).data.yaml: Arquivo de configuração que define os caminhos do dataset e os nomes das classes.check_dataset.py: Script de sanitização e integridade dos dados.train.py: Script para treinamento do modelo YOLOv8.auditor_stride.py: Script de inferência e geração do relatório de auditoria.🛠️ Pré-requisitosAntes de iniciar, certifique-se de ter o Python 3.8+ instalado e instale a biblioteca principal:Bashpip install ultralytics
-🚀 Guia de Execução (Ordem Obrigatória)Para garantir que o modelo aprenda corretamente, os passos devem ser seguidos nesta sequência:Passo 1: Validação do DatasetAntes de iniciar qualquer processamento, execute o script de validação para garantir que todas as imagens possuem rótulos correspondentes.Bashpython check_dataset.py
-Por que isso é importante? Garante a integridade dos dados. Se uma imagem de validação não tiver um label, o modelo não conseguirá calcular métricas de precisão, resultando em resultados zerados.Passo 2: Treinamento do ModeloCom os dados validados, inicie o treinamento do YOLOv8.Bashpython train.py
-O que acontece aqui? O modelo processa as imagens de treino por diversas épocas, ajustando seus pesos neurais. Ao final, o arquivo best.pt (os melhores pesos encontrados) será gerado na pasta runs/detect/train/weights/.Passo 3: Auditoria de SegurançaApós o treino, utilize o script principal para realizar a auditoria em novas imagens de diagramas.Bashpython auditor_stride.py
-O que acontece aqui? Este é o produto final. O script carrega o modelo treinado, detecta os componentes na imagem alvo e cruza os resultados com uma matriz de ameaças STRIDE, exibindo as recomendações de segurança no terminal ou em relatório.📊 Análise de MétricasO sucesso do modelo é medido através de dois pilares principais presentes nos gráficos gerados após o treino:mAP (Mean Average Precision): Indica a precisão média do modelo. Valores próximos de 1.0 (ou 100%) indicam que o modelo identifica os componentes e seus limites (bounding boxes) com alta fidelidade.Loss (Perda): Representa o "erro" do modelo. Espera-se que as curvas de train/loss e val/loss decresçam de forma constante. Uma queda acentuada seguida de estabilidade indica que o modelo convergiu com sucesso.Nota: Caso as métricas de validação apareçam zeradas, revise o Passo 1 para garantir que os caminhos no arquivo data.yaml estejam apontando corretamente para as pastas de labels.🛡️ Metodologia STRIDE AplicadaO sistema está configurado para mapear detecções para ameaças específicas:ComponenteAmeaça STRIDERecomendação de SegurançaServidor EC2Tampering / DoSImplementar Security Groups restritos e Patching de OS.S3 BucketInfo DisclosureHabilitar Block Public Access e criptografia em repouso.DatabaseSpoofing / TamperingUtilizar autenticação IAM e backups multi-regionais.Desenvolvido para o Tech Challenge - Engenharia de Machine Learning.
+# 🛡️ CloudGuard-STRIDE: Auditoria Automatizada de Infraestrutura via YOLOv8
+
+Este projeto foi desenvolvido como parte do **Tech Challenge (Fase 5)** da Pós-Graduação. O objetivo é integrar Inteligência Artificial e Segurança Cibernética para automatizar a detecção de ativos de nuvem em diagramas de arquitetura e realizar uma auditoria de riscos baseada na metodologia **STRIDE**.
+
+O sistema utiliza o modelo **YOLOv8** para reconhecimento visual e um motor de regras para mapear ameaças e recomendações de mitigação.
+
+---
+
+## 📂 Estrutura do Projeto
+
+A organização dos arquivos segue o padrão recomendado para reprodutibilidade e integridade do modelo:
+
+* **`dataset/`**: Diretório contendo os dados de treinamento.
+    * `images/`: Imagens do projeto divididas em `train` e `val`.
+    * `labels/`: Arquivos de anotação `.txt` correspondentes (Padrão YOLO).
+* **`data.yaml`**: Configuração de caminhos e definição das classes (ex: Servidor EC2).
+* **`check_dataset.py`**: Script de sanitização e verificação de integridade.
+* **`train.py`**: Pipeline de treinamento do modelo.
+* **`auditor_stride.py`**: Script final de inferência e auditoria de segurança.
+
+---
+
+## 🛠️ Pré-requisitos
+
+O projeto requer a instalação da biblioteca `ultralytics` para operação do YOLOv8:
+
+```bash
+pip install ultralytics
+```
+
+---
+
+## 🚀 Guia de Execução (Ordem Obrigatória)
+
+### Passo 1: Validação do Dataset
+Antes de qualquer treinamento, valide a integridade dos seus dados.
+```bash
+python check_dataset.py
+```
+* **Por que fazer isso?** Este script garante que todas as imagens possuem rótulos (labels) correspondentes. Se as métricas nos gráficos aparecerem zeradas, o problema geralmente reside na falta desses arquivos de validação.
+
+### Passo 2: Treinamento do Modelo
+Execute o treinamento para que o modelo aprenda a identificar os componentes.
+```bash
+python train.py
+```
+* **Resultado:** Este passo gera os pesos otimizados em `runs/detect/train/weights/best.pt`. É este arquivo que será utilizado para as auditorias reais.
+
+### Passo 3: Auditoria de Segurança
+Com o modelo treinado, execute a ferramenta de auditoria.
+```bash
+python auditor_stride.py
+```
+* **Função:** O script carrega o `best.pt`, detecta componentes em novas imagens e aplica a matriz de ameaças STRIDE para sugerir mitigações imediatas.
+
+---
+
+## 📊 Análise de Métricas
+
+Para validar a qualidade do modelo entregue, analise os gráficos gerados na pasta `runs/`:
+
+* **mAP (Mean Average Precision):** Indica a acurácia do modelo. Busque valores que subam e se estabilizem próximos a 1.0 (100%).
+* **Loss (Perda):** As curvas de `box_loss`, `cls_loss` e `dfl_loss` devem apresentar uma tendência de queda constante. Se a perda de validação (`val/loss`) começar a subir enquanto a de treino cai, o modelo está sofrendo de *overfitting*.
+
+---
+
+## 🛡️ Metodologia STRIDE Aplicada
+
+| Componente | Ameaça STRIDE | Recomendação de Segurança |
+| :--- | :--- | :--- |
+| **Servidor EC2** | Tampering / DoS | Implementar Security Groups restritos e Patching de OS. |
+| **S3 Bucket** | Info Disclosure | Habilitar Block Public Access e criptografia em repouso. |
+| **Database** | Spoofing / Tampering | Utilizar autenticação IAM e backups multi-regionais. |
+
+---
+**Desenvolvido para o Tech Challenge - Pós-Graduação em Engenharia de Machine Learning.**
