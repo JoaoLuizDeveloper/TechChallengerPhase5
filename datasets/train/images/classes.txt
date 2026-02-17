@@ -21,3 +21,10 @@ soap_apis
 api_gateway
 banco_dados
 servidor_app
+resource_group
+aws_simple_email_service
+private_subnet
+aws_cloud_front
+aws_elastic_file_system
+aws_elastic_cache
+sei_sip

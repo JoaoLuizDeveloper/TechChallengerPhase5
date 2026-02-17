@@ -27,8 +27,8 @@ def main():
     # 4. Inicia o treinamento
     model.train(
         data=os.path.join(BASE_DIR, 'data.yaml'),
-        epochs=100,
-        imgsz=640,
+        epochs=300,
+        imgsz=800,
         device=device,
         workers=0,
         project='runs',      # Pasta que será criada na Fase 05

@@ -3,7 +3,7 @@ path: 'D:\Git\PosGraduacao\Fase 05\Repos\Proprio\TechChallengerPhase5\datasets'
 train: train/images
 val: val/images
 
-nc: 23
+nc: 30
 
 names: [
   'usuario',
@@ -28,5 +28,12 @@ names: [
   'soap_apis',
   'api_gateway',
   'banco_dados',
-  'servidor_app'
+  'servidor_app',
+  'resource_group',
+  'aws_simple_email_service',
+  'private_subnet',
+  'aws_cloud_front',
+  'aws_elastic_file_system',
+  'aws_elastic_cache',
+  'sei_sip'
 ]
