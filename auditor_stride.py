@@ -1,6 +1,6 @@
-from ultralytics import YOLO
-import pandas as pd
-import os
+from ultralytics import YOLO            # Garante o acesso à classe principal para carregar o modelo .pt
+import pandas as pd                     # Essencial para estruturar os dados do dataset e gerar o relatório final
+import os                               # Garante a gestão de arquivos em diferentes partes do script
 
 # ==========================================
 # 1. DEFINA OS CAMINHOS AQUI (AJUSTE CONFORME SUA PASTA)

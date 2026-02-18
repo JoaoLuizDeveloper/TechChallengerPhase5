@@ -1,15 +1,12 @@
 Imagem,Componente,Ameaça STRIDE,Recomendação
 img1.png,servidor_ec2,Tampering / DoS,Security Groups e Patching
 img1.png,load_balancer,Denial of Service,WAF integrado e Auto Scaling
-img1.png,aws_key_managment_KMS,Information Disclosure,Políticas de chave restritivas e Rotação
-img1.png,aws_cloud_watch,Repudiation,Alarmes de métricas e Dashboard de SOC
 img1.png,aws_backup,Information Disclosure,Criptografia e Cofre protegido
-img1.png,aws_cloud_trail,Repudiation,Proteção de deletar logs e MFA Delete
-img2.png,load_balancer,Denial of Service,WAF integrado e Auto Scaling
+img1.png,aws_cloud_watch,Repudiation,Alarmes de métricas e Dashboard de SOC
 img2.png,microsoft_entra_ID,Spoofing,PIM e Revisão de Acesso
-img2.png,usuario,Spoofing,MFA e Acesso Condicional
+img2.png,load_balancer,Denial of Service,WAF integrado e Auto Scaling
 img2.png,rede_vpc,Information Disclosure,VPC Flow Logs e Isolamento de Subnets
-img2.png,resource_group,Analise Manual,Verificar docs
-img2.png,azure_api_management,Elevation of Privilege,Validação de Token e Throttling
-img2.png,developer_portal,Analise Manual,Verificar docs
 img2.png,aws_backup,Information Disclosure,Criptografia e Cofre protegido
+img2.png,developer_portal,Analise Manual,Verificar docs
+img2.png,banco_dados_rds,Information Disclosure,Criptografia em repouso e SSL
+img2.png,resource_group,Analise Manual,Verificar docs

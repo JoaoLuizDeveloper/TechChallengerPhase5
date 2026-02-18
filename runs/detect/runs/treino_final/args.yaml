@@ -5,12 +5,12 @@ data: D:\Git\PosGraduacao\Fase 05\Repos\Proprio\TechChallengerPhase5\data.yaml
 epochs: 300
 time: null
 patience: 100
-batch: 16
+batch: 4
 imgsz: 800
 save: true
 save_period: -1
 cache: false
-device: cpu
+device: '0'
 workers: 0
 project: runs
 name: treino_final
