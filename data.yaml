@@ -1,4 +1,4 @@
-path: 'D:\Git\PosGraduacao\Fase 05\Repos\Proprio\TechChallengerPhase5\datasets'
+path: '/datasets'
 
 train: train/images
 val: val/images

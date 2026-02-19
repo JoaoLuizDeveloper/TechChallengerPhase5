@@ -1,11 +1,12 @@
 from ultralytics import YOLO, settings  # Carrega a arquitetura do YOLOv8 e gerencia configurações globais
 import os                               # Permite navegar em pastas e manipular caminhos de arquivos no Windows
 import torch                            # Base para o Deep Learning; essencial para ativar o uso da GPU (CUDA)
+from pathlib import Path
 
 def main():
-    # DIRETÓRIO MESTRE
-    BASE_DIR = r'D:\Git\PosGraduacao\Fase 05\Repos\Proprio\TechChallengerPhase5'
-    
+    # DIRETÓRIO MESTRE    
+    BASE_DIR = Path(__file__).resolve().parent
+
     # 1. Configurações do YOLO
     settings.update({
         'datasets_dir': BASE_DIR,
